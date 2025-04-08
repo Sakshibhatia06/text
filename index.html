@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>3D Metallic Text Generator</title>
+  <title>Metallic 3D Text</title>
   <style>
     body {
       margin: 0;
@@ -10,113 +10,136 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
-
-    input, select {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 18px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
+      align-items: center;
     }
 
     svg {
       width: 100%;
       max-width: 1000px;
-      height: auto;
     }
 
     .controls {
       margin-bottom: 30px;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    input, select {
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      margin: 0 5px;
     }
   </style>
 </head>
 <body>
 
 <div class="controls">
-  <input type="text" id="textInput" placeholder="Type your text..." value="METALLIC">
+  <input type="text" id="textInput" value="METALLIC" />
   <select id="colorSelect">
+    <option value="silver" selected>Silver</option>
     <option value="gold">Gold</option>
     <option value="yellow">Yellow</option>
-    <option value="silver" selected>Silver</option>
+    <option value="blue">Blue</option>
   </select>
 </div>
 
-<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 1000 300">
   <defs>
-    <!-- GOLD gradient -->
-    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#3b2900"/>
-      <stop offset="20%" stop-color="#a67c00"/>
-      <stop offset="45%" stop-color="#f3d26c"/>
-      <stop offset="50%" stop-color="#ffe49c"/>
-      <stop offset="55%" stop-color="#f3d26c"/>
-      <stop offset="80%" stop-color="#a67c00"/>
-      <stop offset="100%" stop-color="#3b2900"/>
-    </linearGradient>
-
-    <!-- YELLOW gradient -->
-    <linearGradient id="yellowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#6e5a00"/>
-      <stop offset="20%" stop-color="#d8bb00"/>
-      <stop offset="45%" stop-color="#ffee88"/>
-      <stop offset="50%" stop-color="#fff3a8"/>
-      <stop offset="55%" stop-color="#ffee88"/>
-      <stop offset="80%" stop-color="#d8bb00"/>
-      <stop offset="100%" stop-color="#6e5a00"/>
-    </linearGradient>
-
-    <!-- SILVER gradient -->
+    <!-- Silver Gradient -->
     <linearGradient id="silverGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#2a2a2a"/>
-      <stop offset="20%" stop-color="#888"/>
-      <stop offset="45%" stop-color="#dcdcdc"/>
-      <stop offset="50%" stop-color="#eeeeee"/>
-      <stop offset="55%" stop-color="#dcdcdc"/>
-      <stop offset="80%" stop-color="#888"/>
-      <stop offset="100%" stop-color="#2a2a2a"/>
+      <stop offset="0%" stop-color="#2a2a2a" />
+      <stop offset="25%" stop-color="#888" />
+      <stop offset="45%" stop-color="#dcdcdc" />
+      <stop offset="50%" stop-color="#f0f0f0" />
+      <stop offset="55%" stop-color="#dcdcdc" />
+      <stop offset="80%" stop-color="#888" />
+      <stop offset="100%" stop-color="#2a2a2a" />
     </linearGradient>
 
-    <!-- Shadow filter -->
-    <filter id="metalShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feOffset in="SourceAlpha" dx="2" dy="4" result="offOut" />
-      <feGaussianBlur in="offOut" stdDeviation="3" result="blurOut"/>
-      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    <!-- Gold Gradient -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b2900" />
+      <stop offset="25%" stop-color="#a67c00" />
+      <stop offset="45%" stop-color="#f5d77d" />
+      <stop offset="50%" stop-color="#ffe49c" />
+      <stop offset="55%" stop-color="#f5d77d" />
+      <stop offset="80%" stop-color="#a67c00" />
+      <stop offset="100%" stop-color="#3b2900" />
+    </linearGradient>
+
+    <!-- Yellow Gradient -->
+    <linearGradient id="yellowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6e5a00" />
+      <stop offset="25%" stop-color="#d8bb00" />
+      <stop offset="45%" stop-color="#ffee88" />
+      <stop offset="50%" stop-color="#fff3a8" />
+      <stop offset="55%" stop-color="#ffee88" />
+      <stop offset="80%" stop-color="#d8bb00" />
+      <stop offset="100%" stop-color="#6e5a00" />
+    </linearGradient>
+
+    <!-- Updated Blue Gradient -->
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a1c2e" />
+      <stop offset="20%" stop-color="#1aa5da" />
+      <stop offset="38%" stop-color="#69d0f7" />
+      <stop offset="50%" stop-color="#e6faff" />
+      <stop offset="55%" stop-color="#e6faff" />
+      <stop offset="80%" stop-color="#1aa5da" />
+      <stop offset="100%" stop-color="#0a1c2e" />
+    </linearGradient>
+
+    <!-- Reflection Highlight -->
+    <radialGradient id="highlight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Blur Filter -->
+    <filter id="blurHighlight">
+      <feGaussianBlur stdDeviation="15"/>
     </filter>
   </defs>
 
-  <!-- 3D Metallic Text -->
-  <text id="metalText" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+  <!-- Base Text -->
+  <text id="metalText"
+        x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
         font-family="Arial" font-size="120" font-weight="bold"
-        fill="url(#silverGradient)" filter="url(#metalShadow)">
+        fill="url(#silverGradient)">
+    METALLIC
+  </text>
+
+  <!-- Reflection Layer -->
+  <text id="highlightText"
+        x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial" font-size="120" font-weight="bold"
+        fill="url(#highlight)" filter="url(#blurHighlight)" opacity="0.7">
     METALLIC
   </text>
 </svg>
 
 <script>
-  const input = document.getElementById("textInput");
-  const select = document.getElementById("colorSelect");
-  const text = document.getElementById("metalText");
+  const textInput = document.getElementById("textInput");
+  const colorSelect = document.getElementById("colorSelect");
+  const metalText = document.getElementById("metalText");
+  const highlightText = document.getElementById("highlightText");
 
-  input.addEventListener("input", () => {
-    text.textContent = input.value || " ";
+  textInput.addEventListener("input", () => {
+    metalText.textContent = textInput.value || " ";
+    highlightText.textContent = textInput.value || " ";
   });
 
-  select.addEventListener("change", () => {
-    const gradientId = select.value + "Gradient";
-    text.setAttribute("fill", `url(#${gradientId})`);
+  colorSelect.addEventListener("change", () => {
+    const val = colorSelect.value;
+    metalText.setAttribute("fill", `url(#${val}Gradient)`);
   });
-
-  // Set default fill on load
-  text.setAttribute("fill", "url(#silverGradient)");
 </script>
 
 </body>
 </html>
+
 
 
